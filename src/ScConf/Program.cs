@@ -1,7 +1,6 @@
 ﻿namespace ScConf
 {
   using System;
-  using System.Collections.Generic;
   using System.IO;
   using System.Linq;
   using System.Net;
@@ -10,7 +9,7 @@
 
   public static class Program
   {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
       if (args.Length != 2)
       {
@@ -18,13 +17,13 @@
         Console.WriteLine("1. path to website folder");
         Console.WriteLine("2. mode (can be CM|CD|PR[ocessing]|RE[porting]|CMPR)");
         return;
-      }      
+      }
 
       var mode = GetMode(args.Last());
       var include = Path.Combine(args.First(), @"App_Config\Include");
       var Location = new DirectoryInfo(include);
 
-      var namesToIgnore = new[] { "UseServerSideRedirect.config", "DataFolder.config" }
+      var namesToIgnore = new[] {"UseServerSideRedirect.config", "DataFolder.config"}
         .Select(x => new ConfigFileName(x))
         .ToArray();
 
@@ -34,7 +33,7 @@
         .ToList();
 
       var data = GetFileDetails()
-        .Where(x => !namesToIgnore.Any(z => x.FileName.Equals(z)))        
+        .Where(x => !namesToIgnore.Any(z => x.FileName.Equals(z)))
         .Where(x => x.Actions[mode] != FileAction.NA)
         .ToList();
 
@@ -42,7 +41,7 @@
       foreach (var actualFileName in actualFileNames)
       {
         var details = data.FirstOrDefault(x => x.FileName.Equals(actualFileName));
-        if (details?.Actions[mode] == FileAction.Disable && details.SearchProvider != SearchProvider.Solr)
+        if ((details?.Actions[mode] == FileAction.Disable) && (details.SearchProvider != SearchProvider.Solr))
         {
           data.Remove(details);
 
@@ -57,7 +56,7 @@
             Console.WriteLine("Press D to disable the file (or any other key to skip)... ");
             Console.WriteLine();
             var result = Console.ReadKey();
-            
+
             if (result.KeyChar.ToString().ToUpper() != "D")
             {
               Console.WriteLine();
@@ -83,7 +82,7 @@
       // make sure all necessary files are enabled
       foreach (var detail in data)
       {
-        if (detail.Actions[mode] != FileAction.Enable || detail.SearchProvider == SearchProvider.Solr)
+        if ((detail.Actions[mode] != FileAction.Enable) || (detail.SearchProvider == SearchProvider.Solr))
         {
           continue;
         }
@@ -113,7 +112,7 @@
           Console.WriteLine("One or several files can be enabled:");
           Console.WriteLine();
 
-          for (int i = 0; i < files.Length; i++)
+          for (var i = 0; i < files.Length; i++)
           {
             Console.WriteLine($"  {i + 1}. {files[i].FullName.Substring(include.Length)}");
             Console.WriteLine();

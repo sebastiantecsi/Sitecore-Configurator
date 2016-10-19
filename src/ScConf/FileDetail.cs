@@ -7,22 +7,22 @@
   {
     public FileDetail(DataRow row)
     {
-      this.FileName = new ConfigFileName(row.Configfilename);
-      this.FilePath = Path.Combine(row.FilePath, row.Configfilename);
-      this.SearchProvider = ParseSearchProvider(row.SearchProviderUsed);
+      FileName = new ConfigFileName(row.Configfilename);
+      FilePath = Path.Combine(row.FilePath, row.Configfilename);
+      SearchProvider = ParseSearchProvider(row.SearchProviderUsed);
 
-      this.Actions = new Dictionary<InstanceType, FileAction>
+      Actions = new Dictionary<InstanceType, FileAction>
       {
-        { InstanceType.CD, ParseFileAction(row.ContentDeliveryCD) },
-        { InstanceType.CM, ParseFileAction(row.ContentManagementCM) },
-        { InstanceType.PR, ParseFileAction(row.Processing) },
-        { InstanceType.RE, ParseFileAction(row.Reporting) },
-        { InstanceType.CMPR, ParseFileAction(row.CMProcessing) },
+        {InstanceType.CD, ParseFileAction(row.ContentDeliveryCD)},
+        {InstanceType.CM, ParseFileAction(row.ContentManagementCM)},
+        {InstanceType.PR, ParseFileAction(row.Processing)},
+        {InstanceType.RE, ParseFileAction(row.Reporting)},
+        {InstanceType.CMPR, ParseFileAction(row.CMProcessing)}
       };
     }
 
     /// <summary>
-    /// The configuration file name that ends with .config and doesn't contain any .example, .sample etc. suffixes.
+    ///   The configuration file name that ends with .config and doesn't contain any .example, .sample etc. suffixes.
     /// </summary>
     public ConfigFileName FileName { get; }
 
@@ -67,28 +67,5 @@
           return SearchProvider.NA;
       }
     }
-  }
-
-  public enum InstanceType
-  {
-    CD,
-    CM,
-    PR,
-    RE,
-    CMPR
-  }
-
-  public enum SearchProvider
-  {
-    NA,
-    Lucene,
-    Solr
-  }
-
-  public enum FileAction
-  {
-    NA,
-    Enable,
-    Disable
   }
 }

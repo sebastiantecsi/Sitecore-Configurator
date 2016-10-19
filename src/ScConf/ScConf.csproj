@@ -44,16 +44,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="File.cs" />
+    <Compile Include="ConfigFileName.cs" />
+    <Compile Include="FileAction.cs" />
     <Compile Include="FileDetail.cs" />
-    <Compile Include="FileDetails.cs" />
+    <Compile Include="DataRow.cs" />
+    <Compile Include="InstanceType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
