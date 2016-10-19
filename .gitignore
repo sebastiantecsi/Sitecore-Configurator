@@ -1,0 +1,9 @@
+*.user
+src/.vs/
+src/packages/
+src/ScConf/.vs/
+src/ScConf/bin/
+src/ScConf/obj/
+src/UnitTestProject1/bin/
+src/UnitTestProject1/obj/
+src/TestResults/
