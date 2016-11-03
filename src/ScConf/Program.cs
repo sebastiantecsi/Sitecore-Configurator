@@ -65,7 +65,7 @@
               continue;
             }
 
-            var disabledFilePath = file.FullName.Replace(actualFileName.FileName, actualFileName.DisabledFileName);
+            var disabledFilePath = Path.Combine(file.DirectoryName, actualFileName.DisabledFileName);
 
             if (File.Exists(disabledFilePath))
             {
